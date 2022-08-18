@@ -1,29 +1,24 @@
 ---
+title: RNG using VCMA Magnetic Tunnel Junctions
 layout: post
-title:  "Welcome to Jekyll!"
-date:   2022-08-16 23:00:52 +0200
-categories: jekyll update
+date: '2022-08-16 23:00:52 +0200'
+categories:
+- jekyll
+- update
 ---
-You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
-Jekyll requires blog post files to be named according to the following format:
+Magnetic Tunnel Junctions are magnetic memory devices with two single-domain magnets one of whose magnetization direction is pinned (pinned layer PL) and one whose magnetization can change (free layer FL).
 
-`YEAR-MONTH-DAY-title.MARKUP`
+The MTJ nanodevice is sensitive to thermal excitations, causing some problems for data retention and probabilistic behaviour when writing. On the other hand, this probabilistic behaviour of the MTJ makes it a good candidate for use in RNG!
 
-Where `YEAR` is a four-digit number, `MONTH` and `DAY` are both two-digit numbers, and `MARKUP` is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.
+# 
 
-Jekyll also offers powerful support for code snippets:
+# Voltage-Controlled Magnetic Anisotropy
 
-{% highlight ruby %}
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
-{% endhighlight %}
+The perpendicular anisotropy in very thin barrier CoFeB-MgO MTJs arises from interfacial interactions of the atoms in the interface between the FL and the barrier. Applying a voltage on the MTJ affects the orbital dynamics at the FL/tunnel barrier causing a lowering of the energy barrier between the P and AP states. A strong enough voltage causes the barrier to essentially become negative, and the state between P and AP becomes the lowest-energy configuration, causing the FL magnetization to oscillate. With this voltage-controlled magnetic anisotropy, one can be used to switch the state of the MTJ.
 
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
+If the voltage is kept, the magnetization doesn't oscillate forever. It eventually settles in a metastable in-between direction. The final FL direction once the voltage is removed is **truly random** (largely dependent on **random thermal excitation**).
 
-[jekyll-docs]: https://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
+# References
+
+1. Quizon, Lawrence Roman A., et al. "A Voltage-Controlled Magnetic Anisotropy based True Random Number Generator." 2021 18th International SoC Design Conference (ISOCC). IEEE, 2021.
