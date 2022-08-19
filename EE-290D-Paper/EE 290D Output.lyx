@@ -1,0 +1,2179 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass IEEEtran
+\begin_preamble
+% for subfigures/subtables
+
+\usepackage[caption=false,font=footnotesize]{subfig}
+\usepackage{graphicx}
+
+\let\oldincludegraphics\includegraphics
+\renewcommand\includegraphics[2][]{%
+  \oldincludegraphics[width=\linewidth]{#2}
+}
+\end_preamble
+\options conference
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding iso8859-15
+\fontencoding T1
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_title "Small-Dictionary LCA Sparse Coding for Low-Power Pattern Recognition in Edge Devices"
+\pdf_author "Lawrence Roman Quizon"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered true
+\pdf_bookmarksopen true
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle false
+\pdf_quoted_options "pdfborderstyle=,pdfpagelayout=OneColumn,pdfnewwindow=true,pdfstartview=XYZ,plainpages=false"
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 0
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 2
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Small-Dictionary LCA Sparse Coding for Low-Power Pattern Recognition in
+ Edge Devices
+\end_layout
+
+\begin_layout Author
+\begin_inset Flex Author Name
+status open
+
+\begin_layout Plain Layout
+Lawrence
+\begin_inset space ~
+\end_inset
+
+Roman
+\begin_inset space ~
+\end_inset
+
+A.
+\begin_inset space ~
+\end_inset
+
+Quizon, Marc D.
+ Rosales, Anastacia B.
+ Alvarez
+\end_layout
+
+\end_inset
+
+
+\begin_inset Flex Author Affiliation
+status open
+
+\begin_layout Plain Layout
+Electrical and Electronics Engineering Institute
+\begin_inset Newline newline
+\end_inset
+
+ University of the Philippines-Diliman
+\begin_inset Newline newline
+\end_inset
+
+ Quezon City, Philippines
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+Sparse coding can be used to perform feature extraction and classification
+ on high-dimensional data and is a mechanism which biological neural sensory
+ systems employ.
+ The Locally Competitive Algorithm (LCA) is a sparse coding mechanism compatible
+ with the memristor crossbars used for in-memory computing, and is shown
+ here to have promise of being effective with low enough power and scale
+ to be suitable for use in edge devices for classifying/compressing signals
+ such as energy harvesting contexts and images on the edge.
+ This paper explores the tradeoffs of different aspects of the algorithm
+ such as the dictionary completeness, activation threshold, and number of
+ iterations in order to increase LCA efficiency in memristor crossbars on
+ the edge in anticipation of challenges such as the quantization, variance
+ and energy constraints.
+ A 100% accuracy was achieved for classifying 5 different gestures from
+ synthetic solar energy harvesting data using only 2 iterations of the LCA
+ on a very small 50-element dictionary.
+\end_layout
+
+\begin_layout Peer Review Title
+
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+In the increasingly more popular paradigm of edge computing, information
+ processing takes place not only in powerful servers in "center nodes" but
+ also in the "edges" of a network.
+ This allows networks of IoT devices like wireless sensors designed for
+ low-power operation tasks to save even more energy by avoiding energy expensive
+ transmission over multiple hops or long distances.
+ Because of their heavy use of the multiply-and-accumulate (MAC) operation,
+ most signal processing algorithms have trouble being implemented on the
+ edge.
+ Using novel memristor devices connected in a crossbar architecture is a
+ big leap towards the energy-efficient implementation of the MAC-operation
+ on the edge 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "sebastian2020memory"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Sparse coding is one such algorithm that has been successful for a variety
+ of applications such as face recognition 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wright2009sparse"
+literal "false"
+
+\end_inset
+
+ and visual tracking 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "zhang2013sparse"
+literal "false"
+
+\end_inset
+
+ and has now also found use in energy harvesting context sensing 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "xu2018keh"
+literal "false"
+
+\end_inset
+
+.
+ While there are a variety of algorithms that exist to obtain sparse representat
+ions, an algorithm based on competing neurons, the 
+\begin_inset Quotes eld
+\end_inset
+
+locally competitive algorithm
+\begin_inset Quotes erd
+\end_inset
+
+ (LCA) is particularly promising for use in edge computing due to its compatibil
+ity with the memristor crossbar architecture, on which it has been implemented
+ before 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "sheridan2017sparse"
+literal "false"
+
+\end_inset
+
+.
+ In contrast with popular neural networks that do MAC operations with many
+ weight matrices for each neuron on the previous layer, sparse coding in
+ LCA has the potential to be effective with a single crossbar for the dictionary
+, reducing concerns about memristor variation and scaling problems.
+\end_layout
+
+\begin_layout Standard
+In this paper, accuracy-energy/size tradeoffs with LCA sparse coding parameter
+ selection, choices of dictionary sizing, and number of quantization levels
+ were explored in anticipation of challenges in the crossbar implementation
+ stemming from quantization, memristor variation and energy constraints.
+\end_layout
+
+\begin_layout Standard
+To evaluate the tradeoffs, sparse coding is used to classify 5 different
+ gestures inferred from the energy harvesting response of a solar cell,
+ synthesized using SolarGest 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ma2019solargest"
+literal "false"
+
+\end_inset
+
+ with the parameters outlined in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "solargest parameters"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ In this paper, the current waveforms generated were subsampled into feature
+ vectors of length 
+\begin_inset Formula $128$
+\end_inset
+
+.
+ In the end, this paper produced an LCA sparse coding scheme able to classify
+ 5 different gestures from the current waveform of the solar cell above
+ which these gestures are made to 100% accuracy with only 2 LCA iterations
+ in a 
+\begin_inset Formula $128\times50$
+\end_inset
+
+ dictionary matrix.
+\end_layout
+
+\begin_layout Section
+Classification using LCA
+\end_layout
+
+\begin_layout Standard
+Sparse coding attempts to represent an arbitrary vector 
+\begin_inset Formula $x$
+\end_inset
+
+ by representing it as a linear combination of a set of basis functions
+ 
+\begin_inset Formula $D$
+\end_inset
+
+, called the dictionary.
+ The choice of basis functions can vary.
+ They can be obtained from standard bases, can be completely random, or
+ made/learned from training feature vectors.
+ The objective of sparse coding is to represent 
+\begin_inset Formula $x$
+\end_inset
+
+ in terms a vector of coefficients 
+\begin_inset Formula $a$
+\end_inset
+
+ (called the sparse representation) such that 
+\begin_inset Formula $x=Da^{T}$
+\end_inset
+
+, but with the constraint that 
+\begin_inset Formula $a$
+\end_inset
+
+ be sparse.
+ This can be formulated as the following:
+\begin_inset Formula 
+\begin{equation}
+min_{a}(|x-Da^{T}|_{2}+\lambda|a|_{0})\label{eq:1}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $|\cdot|_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $|\cdot|_{0}$
+\end_inset
+
+ are the 
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $L^{0}$
+\end_inset
+
+ norms, terms which prioritize reconstruction accuracy and sparseness respective
+ly.
+ This optimization problem is non-convex and NP-hard.
+ The LCA is a biologically inspired algorithm for approximating the solution
+ 
+\begin_inset Formula $a$
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "rozell2008sparse"
+literal "false"
+
+\end_inset
+
+.
+ In the LCA, dictionary elements are modelled as leaky neurons with membrane
+ potentials.
+ The membrane potential 
+\begin_inset Formula $u$
+\end_inset
+
+ of an LCA neuron can be described by the difference equation 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "sheridan2017sparse"
+literal "false"
+
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{equation}
+u_{n+1}=\frac{1}{\tau}(-u_{n}+(x-Du_{n}^{T})^{T}D+a_{n})\label{eq:2}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+a_{n}=\begin{cases}
+u_{n} & ifu>\lambda\\
+0 & otherwise
+\end{cases}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Governed by the parameters 
+\begin_inset Formula $\tau$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda$
+\end_inset
+
+, the change in the potential 
+\begin_inset Formula $u$
+\end_inset
+
+ is proportional by 
+\begin_inset Formula $1/\tau$
+\end_inset
+
+ to three terms: its size 
+\begin_inset Formula $(-u)$
+\end_inset
+
+, its similarity to the input 
+\begin_inset Formula $(x^{T}D)$
+\end_inset
+
+ and inhibition from similar neurons 
+\begin_inset Formula $(a(D^{T}D-I_{n}))$
+\end_inset
+
+ where 
+\begin_inset Formula $D^{T}D-I_{n}$
+\end_inset
+
+ is the neuron similarity matrix.
+ If a neuron's potential 
+\begin_inset Formula $u$
+\end_inset
+
+ is above the threshold 
+\begin_inset Formula $\lambda,$
+\end_inset
+
+ it is deemed active, and it starts contributing to the inhibition term.
+ We use the hard thresholding function for the thresholding in this paper
+ for simplicity.
+ The compatibility of the LCA with memristor crossbars stems from the fact
+ that in this algorithm, the only matrix that is being used is D and only
+ with matrix-vector multiplications.
+\end_layout
+
+\begin_layout Standard
+Compression using sparse coding is simple, since the values and indexes
+ of the nonzero sparse coefficients can simply be taken as the compressed
+ signal.
+ Classification can be done using sparse coding by appending multiple dictionari
+es learned for different classes together.
+ After learning each class dictionary 
+\begin_inset Formula $D_{i}$
+\end_inset
+
+ for class 
+\begin_inset Formula $i$
+\end_inset
+
+, the global dictionary is then made by concatenating the class dictionaries
+ 
+\begin_inset Formula $D=[D_{1},D_{2},...,D_{N}]$
+\end_inset
+
+ for 
+\begin_inset Formula $N$
+\end_inset
+
+ classes.
+ The usual method to infer the class of 
+\begin_inset Formula $x$
+\end_inset
+
+ from 
+\begin_inset Formula $a$
+\end_inset
+
+ is called minimal subspace search (MSS).
+ In MSS, given the sparse representation 
+\begin_inset Formula $a$
+\end_inset
+
+ from the global dictionary, the signal is reconstructed using only coefficients
+ associated with each class dictionary- and the predicted class is that
+ of the class dictionary that produces the minimum reconstruction error
+ (residue).
+ Getting the residue for MSS is too computationally expensive to do on edge
+ devices, even with the help of memristor crossbars, and hence we opt to
+ just take the class of the largest sparse coefficient 
+\begin_inset Formula $argmax(a)$
+\end_inset
+
+.
+ Good classification accuracies are obtained despite this, and so it is
+ shown that this scheme can be enough for the gesture classification done
+ in this paper- indicating possible viablity for other EH sensing applications
+ as well.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+SolarGest Input Parameters with Hand Size Statistics taken from Chia et
+ al.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "solargest parameters"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "chia2020anthropometric"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="9" columns="3">
+<features booktabs="true" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Parameter
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Mean
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+StDev
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Hand Diameter
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $9.72cm$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.14cm$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Hand Pos Low
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $2cm$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0.1cm$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Hand Pos High
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $10cm$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1cm$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gesture Speed
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $20cm/s$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1cm/s$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Hand Height (for horizontal gestures)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $5cm$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1cm$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Solar Cell Radius
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $2cm$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Light Intensity
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $200lux$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Solar Cell Current Density
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $7mA/cm^{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A total of 3000 current waveforms were generated using SolarGest containing
+ 5 gestures, 500 of which were used as the training set and the rest were
+ used as the test set.
+ The class dictionaries 
+\begin_inset Formula $D_{i}$
+\end_inset
+
+ were learned using basis pursuit denoising (BPDN) in the SPORCO software
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wohlberg2017sporco"
+literal "false"
+
+\end_inset
+
+.
+ The global dictionaries hence had a total of 
+\begin_inset Formula $K*Nclasses$
+\end_inset
+
+ bases, where 
+\begin_inset Formula $N$
+\end_inset
+
+ is the number of classes and 
+\begin_inset Formula $K$
+\end_inset
+
+ is the number of bases in a class dictionary.
+ A total of 4 global dictionaries with 
+\begin_inset Formula $K=150,50,25,10$
+\end_inset
+
+ were used, along with an unlearned dictionary containing the test vectors
+ and a completely random dictionary.
+ 
+\end_layout
+
+\begin_layout Section
+Results
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename pasted24.png
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Sample Gesture Sparse Coding using 
+\begin_inset Formula $K=25,Q=\infty$
+\end_inset
+
+ Dictionary.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "sample sparse code"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Compressive Sensing
+\end_layout
+
+\begin_layout Standard
+In compressive sensing, the results show that a dictionary as overcomplete
+ as possible is better for the same number of operations and generally for
+ any number of quantization levels.
+\end_layout
+
+\begin_layout Standard
+Shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "reconerror"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is a sample feature reconstruction of various gestures.
+ The LCA fails to converge (it can diverge in discrete time, despite stability
+ in continuous time) to a solution using either the untrained dictionary
+ containing only the training feature vectors or the random dictionary for
+ the parameters shown.
+ For the trained dictionaries, the LCA can settle into a good sparse representat
+ion for all 
+\begin_inset Formula $K=10,25,50,150$
+\end_inset
+
+ where 
+\begin_inset Formula $K$
+\end_inset
+
+ is the number of dictionary elements per class (albeit with a bit of difficulty
+ with the 
+\begin_inset Formula $K=150$
+\end_inset
+
+ dictionary).
+\end_layout
+
+\begin_layout Standard
+Dictionaries with less elements generally lead to more reconstruction error
+ for the same number of iterations, as shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "reconerror"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ (a).
+ However, introducing too many elements will introduce a lot of unnecessary
+ neurons to the code whose feature space (the loose set of feature vectors
+ that will activate it strongly) will overlap with each other, introducing
+ oscillatory behavior in the LCA and generally poorer reconstruction.
+ While overcomplete dictionaries should theoretically allow better sparse
+ reconstructions, the dynamics of the LCA system in discrete time introduces
+ mistakes in single iterations that are more significant the more competition
+ there is (more similar receptive fields between the LCA neurons).
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename pasted26.png
+	lyxscale 25
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Average reconstruction error 
+\begin_inset Formula $|x-Da|_{2}$
+\end_inset
+
+ (a) for each dictionary vs 
+\begin_inset Formula $n$
+\end_inset
+
+ (
+\begin_inset Formula $Q=\infty)$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\lambda,\tau=0.25,40$
+\end_inset
+
+.
+ (a) vs number of quantization levels 
+\begin_inset Formula $Q$
+\end_inset
+
+ vs 
+\begin_inset Formula $K$
+\end_inset
+
+ at 
+\begin_inset Formula $n=45$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\lambda,\tau=0.25,40$
+\end_inset
+
+.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "reconerror"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+When the dictionaries are quantized, the lower the quantization number the
+ lower the reconstruction accuracy gets for a specific number of iterations.
+ This reconstruction accuracy does not get better over more iterations,
+ resulting in a sort of steady-state error, as seen in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "reconerror"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ (b).
+ The quantization can sometimes randomly be better for the reconstruction,
+ and 
+\begin_inset Formula $K=150$
+\end_inset
+
+ having more elements is subject to this effect the most while the others
+ can be observed to get less random fluctionations as the dictionaries get
+ smaller.
+ 
+\end_layout
+
+\begin_layout Subsection
+Pattern Recognition
+\end_layout
+
+\begin_layout Standard
+Using as few iterations for the LCA as possible is ideal to lower the energy
+ consumption of the computation in a memristor crossbar.
+ From equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:2"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, each iteration of the LCA only needs two vectors to be multiplied to the
+ dictionary 
+\begin_inset Formula $D,$
+\end_inset
+
+ and hence, the number of crossbar operations is twice the number of iterations
+ 
+\begin_inset Formula $c=2n$
+\end_inset
+
+.
+ Furthermore, a dictionary as small as possible is also ideal for a smaller
+ crossbar, which also directly reduces the energy consumption of the computation.
+\end_layout
+
+\begin_layout Standard
+Lower 
+\begin_inset Formula $K$
+\end_inset
+
+ and 
+\begin_inset Formula $Q$
+\end_inset
+
+ result in better classification accuracies suggesting that concatenating
+ dictionaries as undercomplete (as low 
+\begin_inset Formula $K)$
+\end_inset
+
+ as possible for each class is ideal for classification using LCA.
+ It may be that by reducing the number of dictionary elements, the learned
+ elements are forced to be more orthogonal to each other, increasing the
+ discriminative ability at the cost of reconstruction accuracy (for which
+ overcomplete dictionaries are better, since infinite sparse solutions exist)
+ as was found in the previous section.
+\end_layout
+
+\begin_layout Standard
+Optimal combinations for 
+\begin_inset Formula $\tau$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ can be seen in the grid sweeps in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:-colormaps-of"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ While for some dictionaries the classification accuracies are already too
+ high (lots of 
+\begin_inset Formula $\tau-\lambda$
+\end_inset
+
+ lead to 100% accuracy), optimal combinations of 
+\begin_inset Formula $\tau-\lambda$
+\end_inset
+
+ as a function of 
+\begin_inset Formula $n$
+\end_inset
+
+ and 
+\begin_inset Formula $Q$
+\end_inset
+
+ exist for the other dictionaries.
+ The derivation of analytical expressions for guidelines of optimal combinations
+ from this empirical data is possible, the derivation of which may be good
+ for more difficult classification tasks.
+\end_layout
+
+\begin_layout Standard
+These maps are non-concave, since many local maxima can be found through
+ the grid search.
+ Thus, the use of gradient ascent and the like will be subject to many local
+ maxima, and not be guaranteed to reach the optimal parameters.
+ Despite that, stochastic gradient ascent still tends to reach a set of
+ parameters that give near-optimal accuracy for any 
+\begin_inset Formula $n,K,Q$
+\end_inset
+
+ combinations, given good guesses for the starting points which tend to
+ be 
+\begin_inset Formula $\tau\in(20,30),\lambda\in(0.1,0.3)$
+\end_inset
+
+.
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Maximum Accuracies found for grid search in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:-colormaps-of"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "maximums"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="9" columns="4">
+<features booktabs="true" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Dictionary
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+N
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\lambda,\tau$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Accuracy
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="center" valignment="middle" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $K=150$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $(0.234,25.873)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0.67$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $(0.217,12.381)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0.666$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="center" valignment="middle" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $K=50$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $(0.222,23.492)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0.73$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $(0.094,25.079)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0.772$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="center" valignment="middle" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $K=25$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $(0.117,29.841)$
+\end_inset
+
+ among many
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $(0.050,21.111)$
+\end_inset
+
+ among many
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="center" valignment="middle" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $K=10$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $(0.122,51.270)$
+\end_inset
+
+ among many
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $(0.261,59.206)$
+\end_inset
+
+ among many
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename pasted35.png
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset Formula $\tau-\lambda$
+\end_inset
+
+ grid search map of classification accuracies at 
+\begin_inset Formula $Q=10$
+\end_inset
+
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:-colormaps-of"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In general, lower 
+\begin_inset Formula $K$
+\end_inset
+
+ dictionaries perform better against less quantization levels.
+ However, it can be seen from Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "acc for diff q n=2"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ that, holding
+\begin_inset Formula $K$
+\end_inset
+
+ constant, less quantization levels can be better for the classification
+ accuracy.
+ In particular, it can be noted that 
+\begin_inset Formula $K=10$
+\end_inset
+
+ and 
+\begin_inset Formula $25$
+\end_inset
+
+ plummet after 
+\begin_inset Formula $Q=10$
+\end_inset
+
+ and 
+\begin_inset Formula $9$
+\end_inset
+
+ respectively.
+ After 
+\begin_inset Formula $Q=8,$
+\end_inset
+
+ all the dictionaries work suboptimally.
+ This may be a somewhat random contribution where some quantizations are
+ coincidentally better.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename pasted30.png
+	lyxscale 25
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Line graph of classification accuracies for 
+\begin_inset Formula $K=150,50,25,10$
+\end_inset
+
+ at differing 
+\begin_inset Formula $Q$
+\end_inset
+
+, 
+\begin_inset Formula $n=2$
+\end_inset
+
+.
+ Note how there is a specific 
+\begin_inset Formula $Q$
+\end_inset
+
+ for some 
+\begin_inset Formula $K$
+\end_inset
+
+ at which the accuracy starts plummeting.
+ Gradient Ascent was used to obtain these.
+\begin_inset CommandInset label
+LatexCommand label
+name "acc for diff q n=2"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The high 
+\begin_inset Formula $K$
+\end_inset
+
+ dictionaries also benefit from more iterations as seen in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "acc vs n"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, while the lower 
+\begin_inset Formula $K$
+\end_inset
+
+ dictionaries actually suffer with higher 
+\begin_inset Formula $n$
+\end_inset
+
+, worse in the middle ranges.
+ This can likely be due to the fact that a high 
+\begin_inset Formula $K$
+\end_inset
+
+ allows for more coincidentally activated elements of the wrong class, while
+ more quantized (lower 
+\begin_inset Formula $Q$
+\end_inset
+
+) dictionaries are more susceptible to a sort of steady state error as the
+ number of iterations increase.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $K=150$
+\end_inset
+
+ performing better for odd iterations may be due to oscillation in the LCA
+ output, where the input 
+\begin_inset Formula $x$
+\end_inset
+
+ tends to activate a specific set of neurons 
+\begin_inset Formula $a_{x}\subset a$
+\end_inset
+
+, but these neurons are extremely similar to each other and thus tend to
+ beat each other down through inhibition in the very next cycle.
+ This is removed by decreasing 
+\begin_inset Formula $K,$
+\end_inset
+
+ since forcing the BPDN dictionary learning algorithm to work with less
+ elements forces it to make the elements more dissimilar.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename pasted25.png
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Line graph of classification accuracy vs number of iterations for 
+\begin_inset Formula $Q=16$
+\end_inset
+
+ (a) and 
+\begin_inset Formula $Q=\infty$
+\end_inset
+
+ (b) 
+\begin_inset CommandInset label
+LatexCommand label
+name "acc vs n"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Effects of Conductance Variation on Pattern Recognition
+\end_layout
+
+\begin_layout Standard
+The standard deviation 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ of the conductance of a memristor crossbar is around the difference of
+ two conductance levels in Sheridan et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "sheridan2017sparse"
+literal "false"
+
+\end_inset
+
+, and so that is used as the reference for the conductance variation, henceforth
+ noted as 
+\begin_inset Formula $\Delta L_{Q}$
+\end_inset
+
+.
+ Shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "hist"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ are the histograms of each dictionary on the lowest quantization level
+ 
+\begin_inset Formula $Q$
+\end_inset
+
+ where they achieve great accuracy results, since a low 
+\begin_inset Formula $Q$
+\end_inset
+
+ is ideal for memristor fabrication and write methods.
+\end_layout
+
+\begin_layout Standard
+Standard deviations as much as 
+\begin_inset Formula $\Delta L_{Q}$
+\end_inset
+
+ can render the scheme unusable, and it is visible that even a 
+\begin_inset Formula $0.1\Delta L_{Q}$
+\end_inset
+
+ variation can affect the accuracy to as low as 
+\begin_inset Formula $80\%$
+\end_inset
+
+, which needs to be noted when choosing the memristor to implement the scheme
+ with.
+ Fortunately, the scheme is shown to work to very low 
+\begin_inset Formula $Q$
+\end_inset
+
+, which may let fabricators optimize the memristors for less variation.
+\end_layout
+
+\begin_layout Standard
+Visually, 
+\begin_inset Formula $K=10$
+\end_inset
+
+ gives the best distribution, with the highest number of still-100% accuracies
+ at 
+\begin_inset Formula $0.1\Delta L_{Q}$
+\end_inset
+
+, while having waveforms similar to 
+\begin_inset Formula $K=50$
+\end_inset
+
+ and 
+\begin_inset Formula $25$
+\end_inset
+
+ in the other standard deviations.
+ While 
+\begin_inset Formula $K=150$
+\end_inset
+
+ is showing terrible results here, that is because it is being run at 
+\begin_inset Formula $Q=12,$
+\end_inset
+
+ since its best accuracies can only be obtained at 
+\begin_inset Formula $n$
+\end_inset
+
+ higher than 2 (as seen in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "acc vs n"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename pasted37.png
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Histograms of each dictionary on the lowest quantization level 
+\begin_inset Formula $Q$
+\end_inset
+
+ where they achieve great accuracy results as seen in Figure 7 for 
+\begin_inset Formula $n=2$
+\end_inset
+
+.
+ 
+\begin_inset Formula $K,Q=(150,12),(50,8),(25,10),(10,9)$
+\end_inset
+
+, sweeping the standard deviation 
+\begin_inset Formula $\sigma$
+\end_inset
+
+.
+ This assumes that each quantization level varies as much as each other,
+ and that the averages are uniformly distributed between the minimum and
+ the maximum.
+\begin_inset CommandInset label
+LatexCommand label
+name "hist"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Conclusion
+\end_layout
+
+\begin_layout Standard
+We showed that sparse coding with LCA can be used as a machine learning
+ algorithm suitable for use in edge devices such as energy harvesting wireless
+ sensor nodes if paired with memristor crossbars.
+ A 100% classification accuracy was achieved on the solar cell gesture dataset
+ with only 2 iterations of the LCA on the 
+\begin_inset Formula $K=10$
+\end_inset
+
+ dictionary: only 
+\begin_inset Formula $4$
+\end_inset
+
+ usages of a small 
+\begin_inset Formula $128\times50$
+\end_inset
+
+ crossbar, showing great promise of extremely low energy/classification
+ while avoiding the problems present in large scale crossbars.
+ Subsampling the waveforms smaller than 
+\begin_inset Formula $128$
+\end_inset
+
+ can potentially knock the size of this crossbar down to a smaller scale,
+ avoiding scaling problems with big crossbars.
+\end_layout
+
+\begin_layout Standard
+Larger dictionaries with more elements tend to be better for compression,
+ because they allow for better signal reconstruction.
+ However, smaller dictionaries are much better for classification.
+ Smaller dictionaries are also more robust against quantization, showing
+ great classification accuracies to as low as 
+\begin_inset Formula $Q=9.$
+\end_inset
+
+ The accuracies can, however, vary significantly with conductance variations
+ on the memristors.
+ This trades off with the precision to which conductances need to be written
+ onto the memristors, increasing the energy required.
+\end_layout
+
+\begin_layout Standard
+Using a quantization-aware dictionary learning algorithm like QK-SVD may
+ further increase classification accuracies for less quantization levels.
+ Small-dictionary LCA sparse coding still also needs to be proven effective
+ for more difficult EH classification tasks, such as with noisy data from
+ piezoelectric harvesters.
+ Future work exploring the effectivity of small-dictionary LCA scheme for
+ other EH context sensing tasks or for its already-proven face recognition
+ and visual tracking capabilities is recommended.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "./bibliography/IEEEabrv,./bibliography/references"
+options "./bibliography/IEEEtran"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
