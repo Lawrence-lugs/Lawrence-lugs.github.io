@@ -30,12 +30,21 @@
           </span>
         </label>
 
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/CV/CV.pdf">CV</a></div>
       </nav></div>
 </header>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
         <div class="home">    
-        Huli ka! You're not supposed to be here. :D
+        <ul class="post-list">
+        <ul>
+          {% for post in site.posts %}
+              <span class="post-meta">{{ post.date | date: "%-d %B %Y" }}</span>
+              <a class="post-link" href="{{ post.url }}">{{ post.title }}</a>
+              <p>{{ post.excerpt }}</p>
+          {% endfor %}
+        </h3>
+        </ul>      
       </div>
     </main><footer class="site-footer h-card">
   <data class="u-url" href="/"></data>
