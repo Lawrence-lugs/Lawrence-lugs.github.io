@@ -1,15 +1,16 @@
 ---
 title: Getting started with KLayout
 layout: post
-date: '2022-08-22 23:00:52 +0200'
+date: '2022-08-22 1:00:52 +0200'
 categories:
 - learningnotes
 ---
 
-
-(c) MOSAIC Bootcamp talk by Matthias Koefferlein. See repos [here](https://github.com/klayoutmatthias).
+From MOSAIC Bootcamp talk by Matthias Koefferlein. 
+See repos [here](https://github.com/klayoutmatthias).
 KLayout started as a viewer for GDS2 files.
 Has since gotten features for Editing, Scripting, PCells, File Formats, APIs, Analysis + Verification, Python Modules.
+
 
 ## Starting out
 
