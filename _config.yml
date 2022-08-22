@@ -5,6 +5,6 @@ baseurl: ''
 url: ''
 twitter_username: lafquizon
 github_username: lawrence-lugs
-theme: atlas
+theme: minima
 plugins:
   - jekyll-feed

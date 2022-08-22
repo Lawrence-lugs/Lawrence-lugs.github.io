@@ -3,8 +3,8 @@ title: RNG using VCMA Magnetic Tunnel Junctions
 layout: post
 date: '2021-12-20 23:00:52 +0200'
 categories:
-- jekyll
-- update
+- research
+- learningnotes
 ---
 
 The MTJ nanodevice is sensitive to thermal excitations, causing some problems for data retention and probabilistic behaviour when writing. On the other hand, this probabilistic behaviour of the MTJ makes it a good candidate for use in RNG!

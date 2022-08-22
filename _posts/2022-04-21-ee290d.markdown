@@ -3,8 +3,8 @@ title: Small-Dictionary LCA Sparse Coding for Low-Power Pattern Recognition in E
 layout: post
 date: '2022-04-21 23:00:52 +0200'
 categories:
-- jekyll
-- update
+- research
+- learningnotes
 ---
 
 Sparse coding is one such algorithm that has been successful for a variety of applications such as face recognition [@wright2009sparse] and visual tracking [@zhang2013sparse] and has now also found use in energy harvesting context sensing [@xu2018keh]. While there are a variety of algorithms that exist to obtain sparse representations, an algorithm based on competing neurons, the "locally competitive algorithm" (LCA) is particularly promising for use in edge computing due to its compatibility with the memristor crossbar architecture, on which it has been implemented before [@sheridan2017sparse]. In contrast with popular neural networks that do MAC operations with many weight matrices for each neuron on the previous layer, sparse coding in LCA has the potential to be effective with a single crossbar for the dictionary, reducing concerns about memristor variation and scaling problems.
