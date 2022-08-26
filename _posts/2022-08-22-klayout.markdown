@@ -6,7 +6,7 @@ categories:
 - learningnotes
 ---
 
-From MOSAIC Bootcamp talk by Matthias Koefferlein. 
+Notes from MOSAIC Bootcamp talk by Matthias Koefferlein. 
 See repos [here](https://github.com/klayoutmatthias).
 KLayout started as a viewer for GDS2 files.
 Has since gotten features for Editing, Scripting, PCells, File Formats, APIs, Analysis + Verification, Python Modules.

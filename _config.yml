@@ -8,3 +8,4 @@ github_username: lawrence-lugs
 theme: minima
 plugins:
   - jekyll-feed
+markdown: kramdown
