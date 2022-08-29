@@ -205,15 +205,17 @@ Seven student participants came on the invitation of Silicon Austria Labs to par
 
 <h3 id="1-laygo2-inside-the-mosaic-orchestrator">1. <a href="https://gitlab.com/mosaic_group/mosaic_framework/mosaic-laygo2/-/tree/sdf_integration">LAYGO2 inside the MOSAIC Orchestrator</a></h3>
 
-<h4 id="aquiles-ryan-kevin-lawrence">Aquiles, Ryan, Kevin, Lawrence</h4>
+<h4 id="aquiles-viza-lawrence-quizon-ryan-antonio-kevin-pizarro">Aquiles Viza, Lawrence Quizon, Ryan Antonio, Kevin Pizarro,</h4>
 
 <p>In the first week, the students worked on familiarizing themselves with Infineon’s MOSAIC Orchestrator by integrating the first fully open-source design flow into it: LAYGO2 + MAGIC VLSI.</p>
 
-<p>Through the use of the Orchestrator’s task-based cache-enabled designs, the LAYGO2 design flow was made to be faster and more automated. Generator code was made more specific, with less overhead to the designer by lifting common calls to templates and grids and design initializations to a superclass.</p>
+<p>Using the Orchestrator’s task-based cache-enabled designs allowed the LAYGO2 design to flow faster and be more automated. Lifting common calls to templates and grids and design initializations to a superclass made the generator code more specific with less coding overhead to the designer.</p>
 
 <p>By lifting all PDK-related template calls to the Orchestrator’s PDK abstraction, the generator code no longer requires particular knowledge of the PDK to create- also possibly enabling generator codes.</p>
 
-<p>MAGIC was also integrated into the Orchestrator as a registered tool, allowing it to transform LAYGO2 designs into mag files handled hierarchically for every task with caching.</p>
+<p>We also integrated MAGIC VLSI into the Orchestrator as a registered tool, allowing it to transform LAYGO2 designs into mag files handled hierarchically for every task with caching.</p>
+
+<p><img src="\images\2022-08-29-21-21-39.png" alt="" /></p>
 
 <h3 id="2-fiftynifty-generators-using-laygo2-and-virtuoso_template">2. <a href="https://github.com/Lawrence-lugs/MOSAIC-bootcamp-2022-student-generators">FiftyNifty Generators using LAYGO2 and virtuoso_template</a></h3>
 
@@ -221,7 +223,7 @@ Seven student participants came on the invitation of Silicon Austria Labs to par
 
 <p>After that, the students went on creating LAYGO2+SKY130 generators for the basic two-transistor circuits from the FiftyNifty, and some other basic circuits. See repository here.</p>
 
-<p><strong>LAYGO2</strong></p>
+<p><strong>LAYGO2+SKY130</strong></p>
 
 <ol>
   <li>(Nifty 7) Current Mirror (Kevin)</li>
@@ -254,7 +256,7 @@ Seven student participants came on the invitation of Silicon Austria Labs to par
   </li>
 </ol>
 
-<p><strong>AnalogBase</strong></p>
+<p><strong>AnalogBase+cds_ff_mpt (finfet tech)</strong></p>
 
 <ol>
   <li>(Nifty 1) Inverter, NAND Gate (Taeho)</li>
@@ -265,11 +267,15 @@ Seven student participants came on the invitation of Silicon Austria Labs to par
   <li>(Nifty 7) Sophisticated Current Mirrors (Kevin)</li>
 </ol>
 
+<p><img src="\images\2022-08-29-21-31-19.png" alt="" /></p>
+
 <h3 id="3-klayout-and-laygo2">3. KLayout and LAYGO2</h3>
 
-<h4 id="ryan-kevin">Ryan, Kevin</h4>
+<h4 id="ryan-antonio-kevin-pizarro">Ryan Antonio, Kevin Pizarro</h4>
 
 <p>By using the LAYGO2 package and framework inside KLayout’s scripting environment, students managed to enable KLayout to show previews of LAYGO2 designs and allow it to export to GDS, which may eventually allow a complete LAYGO2 workflow to be automated (say, with the Orchestrator, XSchem and netgen) inside KLayout.</p>
+
+<p><img src="\images\2022-08-29-21-07-21.png" alt="" /></p>
 
 <h3 id="4-the-open-source-bag2-template-temp-name">4. The open-source BAG2 Template (Temp Name)</h3>
 
@@ -288,52 +294,80 @@ Seven student participants came on the invitation of Silicon Austria Labs to par
 
 <p><img src="\images\2022-08-25-15-01-13.png" alt="" /></p>
 
-<h2 id="section-for-testimonies">Section for testimonies</h2>
+<h2 id="bootcamp-experiences">Bootcamp Experiences</h2>
 
-<ul>
-  <li>Boosting the ease of use of these documentation-lacking frameworks.</li>
-  <li>Inspired people.</li>
-  <li>For CIDR</li>
-  <li>Cooperation outside the bubble for AC3E</li>
-  <li>Discovering that people want to learn about LAYGO2</li>
-  <li>Different POVs from people with different backgrounds (Digital, Software, Analog only, Layout generation people.)</li>
-  <li>Kinda like a proto-conference on layout generation, for which everyone has different amounts of progress and different approaches and different software. It’s a way to remap in the heads of everyone who wants to work on these things.</li>
-  <li>The mosaic orchestrator
-    <ul>
-      <li>Troubles with definition of PDK views</li>
-      <li>Need both approaches to work in the same kind of environment, instead of mosaic-laygo2-magic and mosaic-analogbase-virtuoso</li>
-    </ul>
-  </li>
-</ul>
+<p>Lawrence Quizon</p>
 
-  </div><a class="u-url" href="/MOSAIC%20Bootcamp%20Documentation/mosaicdocumain.html" hidden></a>
-</article>
+<blockquote>
+  <p>Before the bootcamp, I tried to learn using these analog generators by myself.  I found that most of them do not have satisfactory documentation, and have very high learning curves. In the bootcamp, since a lot of people with experience using (and developing) these generators firsthand, it very quickly closes the learning curve and gets you ready to use it for your own research.</p>
+
+  <!-- > For us in Microlab, the reusable analog generation paradigm is a very important tool for IC design research. With the enablement of this paradigm with open-source tools, which is a vision that MOSAIC has, it will also enable a lot of other Philippine universities to use analog generators, fostering cooperation. -->
+
+  <p>[The bootcamp] was kinda like a proto-conference on layout generation, for which everyone has different amounts of progress and different approaches and different software. It’s a way to remap the progress in the heads of everyone who wants to work on these things.</p>
+</blockquote>
+
+<p>Taeho Shin</p>
+
+<blockquote>
+  <p>I’ve found that you all are very inspired people, and I’m very glad to have come to this bootcamp and shown you LAYGO2, and also to have learned about AnalogBase and the other analog generation tools. It makes me happy to discovering that people want to learn about LAYGO2.</p>
+</blockquote>
+
+<p>Aquiles Viza</p>
+
+<blockquote>
+  <p>This is very important for AC3E, because it is cooperation outside the bubble. It was very interesting to hear different POVs about the tools from people with different backgrounds (Digital, Software, Analog only, Layout generation people.)</p>
+</blockquote>
+
+<h2 id="tutorials-and-notes">Tutorials and notes</h2>
+
+<h4><a href="/MOSAIC%20Bootcamp%20Documentation/notes/2022-08-22-klayout.html"> Getting started with KLayout </a></h4>
+
+<h4><a href="/MOSAIC%20Bootcamp%20Documentation/notes/2022-08-23-analogbase-generators.html"> Writing your first AnalogBase virtuoso-template generator - Regulated Cascode </a></h4>
+
+<h4><a href="/MOSAIC%20Bootcamp%20Documentation/notes/2022-08-23-fiftynifty.html"> The Fifty Nifty Two-Transistor Circuit Variations </a></h4>
+
+<h4><a href="/MOSAIC%20Bootcamp%20Documentation/notes/2022-08-24-phdwithbag.html"> PHD with BAG: Thoughts and experiences, Santerri Porrasmaa </a></h4>
+
+          </article>
+
+          
 
       </div>
-    </main><footer class="site-footer h-card">
-  <data class="u-url" href="/"></data>
-
-  <div class="wrapper">
-
-    <h2 class="footer-heading">Lawrence Roman A. Quizon</h2>
-
-    <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-1">
-        <ul class="contact-list">
-          <li class="p-name">Lawrence Roman A. Quizon</li><li><a class="u-email" href="mailto:lawrence.quizon@eee.upd.edu.ph">lawrence.quizon@eee.upd.edu.ph</a></li></ul>
-      </div>
-
-      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/lawrence-lugs"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">lawrence-lugs</span></a></li><li><a href="https://www.twitter.com/lafquizon"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">lafquizon</span></a></li></ul>
-</div>
-
-      <div class="footer-col footer-col-3">
-        <p></p>
       </div>
     </div>
 
+    <footer class="site-footer">
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <h4>CONTACT</h4>
+
+        <div class="social-links">
+          
+        </div>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <h4>FOLLOW</h4>
+
+        <div class="social-links follow-links">
+          
+        </div>
+      </div>
+
+      
+    </div>
   </div>
-
 </footer>
-</body>
 
+
+
+
+
+
+
+    <script type="text/javascript" src="http://localhost:4000/assets/js/vendor/cash-4.1.5.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/assets/js/site.js"></script>
+
+  </body>
 </html>
