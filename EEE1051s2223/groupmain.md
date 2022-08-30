@@ -1,9 +1,12 @@
 ---
 title: "EEE 105 1s2223 | Course Guide"
-layout: page
+layout: material
 categories:
 - coursematerial
+group: "EEE 105 1s2223"
 ---
+
+# EEE 105 1s2223 | Course Guide
 
 Hi everyone! Welcome to EEE 105. In this course, you will essentially learn how to connect your ideas of logic gates to modern computing devices, such as the ones found in your phone or your laptop.
 
@@ -17,11 +20,13 @@ Lab classes will be held by Sir Zyrel Renzo Sanchez separately.
 
 ### Communication
 
-You will automatically be enrolled into an UVLE course site. You should be able to see that you are enrolled in **EEE 105 - WFR**
+You will automatically be enrolled into an UVLE course site. You should be able to see that you are enrolled in **EEE 105 - THX**
 
 For the lecture, I will post course materials, announcements and updates on the course in the UVLE as well.
 
 My name is Lawrence Quizon, you can contact me through email at lawrence.quizon@eee.upd.edu.ph 
+
+I am available for consultation on any weekday.
 
 ### Class Materials (Lecture)
 
@@ -48,11 +53,25 @@ You may refer to the table below for the **course schedule**.
 | 15,16 | December 12  | December 23  | I/O                                     | Problem Set 4 |
 | 17,18 | December 26  | January 6    | Christmas Break, Final Exam             |
 
+### Problem Sets and Deadlines
+
+The deadlines for the problem sets are going to be a week after their last topic. Hence:
+
+1. Problem Set 1 - October 7
+2. Problem Set 2 - November 4
+3. Problem Set 3 - December 2
+4. Problem Set 4 - January 6
+
+Quizzes will open and close along with their respective topics.
+
 ### Grading
 
-$$ FinalGrade = 0.5*LabGrade+0.25*Quizzes+0.25*ProblemSets $$
+$$ LecGrade = 0.5*Quizzes+0.5*ProblemSets $$
+$$ FinalGrade = 0.5*LabGrade+0.5*LecGrade $$
 
-You need 60% overall to pass the course, without getting less than 50% on any module.
+You need at least 60% LecGrade to pass the lecture class, without getting less than 50% on any module.
+
+You need 60% FinalGrade to pass the course. You must pass both lec and lab.
 
 UP Grade conversion scale is as below, applied after rounding Final Grades to the nearest integer:
 
