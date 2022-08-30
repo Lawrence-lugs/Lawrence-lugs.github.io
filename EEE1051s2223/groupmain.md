@@ -69,7 +69,7 @@ Quizzes will open and close along with their respective topics.
 $$ LecGrade = 0.5*Quizzes+0.5*ProblemSets $$
 $$ FinalGrade = 0.5*LabGrade+0.5*LecGrade $$
 
-You need at least 60% LecGrade to pass the lecture class, without getting less than 50% on any module.
+You need at least 60% LecGrade to pass the lecture class, without getting less than 50% on any modules.
 
 You need 60% FinalGrade to pass the course. You must pass both lec and lab.
 
