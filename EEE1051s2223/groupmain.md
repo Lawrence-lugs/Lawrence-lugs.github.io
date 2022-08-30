@@ -44,14 +44,13 @@ You may refer to the table below for the **course schedule**.
 | Week  | Start        | End          | Topic                                   | Assessment    |
 | ----- | ------------ | ------------ | --------------------------------------- | ------------- |
 | 1,2   | September 5  | September 16 | Computers, Instructions and Performance | Problem Set 1 |
-| 3,4   | September 19 | September 30 | Number Representations, Operations      | Problem Set 1 |
+| 3,4   | September 19 | September 30 | Number Representations, Operations      |^
 | 5,6   | October 3    | October 14   | Floating-Point, Datapath                | Problem Set 2 |
-| 7,8   | October 17   | October 28   | Single-Cycle Datapath                   | Problem Set 2 |
+| 7,8   | October 17   | October 28   | Single-Cycle Datapath                   |^
 | 9,10  | October 31   | November 11  | MIPS Multi-Cycle Datapath               | Problem Set 3 |
-| 11,12 | November 14  | November 25  | Pipelined Datapath                      | Problem Set 3 |
-| 13,14 | November 28  | December 9   | Memory                                  | Problem Set 4 |
-| 15,16 | December 12  | December 23  | I/O                                     | Problem Set 4 |
-| 17,18 | December 26  | January 6    | Christmas Break, Final Exam             |
+| 11,12 | November 14  | November 25  | Pipelined Datapath                      |^
+| 13,14 | November 28  | December 19  | Memory                                  | Problem Set 4 |
+| 15,16 | December 12  | December 21  | IO                                      |^
 
 ### Problem Sets and Deadlines
 
