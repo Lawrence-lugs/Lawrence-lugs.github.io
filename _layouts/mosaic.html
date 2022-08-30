@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {%- include head.html -%}
+
+  <body>
+
+    <header class="site-header" style="  border-bottom: 1px solid $grey-color-light;
+    min-height: 56px;
+  
+    padding-top: 10px;
+    padding-bottom: 10px;">
+    <div class="wrapper">
+      <a class="site-title" href="http://lawrence-lugs.github.io/" style="font-size: 26px;line-height: 56px;letter-spacing: -1px;float: left;">
+        <img src="http://lawrence-lugs.github.io/MOSAIC%20Bootcamp%20Documentation/title.png" alt="MOSAIC" style="height:28px" />
+      </a>
+  
+      <nav class="site-nav">
+        <a href="#" class="menu-icon"></a>
+  
+        <div class="menu">
+          
+        </div>
+      </nav>
+    </div>
+  </header>
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        {{ content }}
+      </div>
+    </main>
+
+  </body>
+
+</html>
