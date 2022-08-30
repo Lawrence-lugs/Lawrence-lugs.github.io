@@ -43,7 +43,7 @@ You may refer to the table below for the **course schedule**.
 
 | Week  | Start        | End          | Topic                                   | Assessment    |
 | ----- | ------------ | ------------ | --------------------------------------- | ------------- |
-| 1,2   | September 5  | September 16 | Computers, Instructions and Performance | Problem Set 1 |
+| 1,2   | September 5  | September 16 | [Computers, Instructions and Performance](module1.html) | Problem Set 1 |
 | 3,4   | September 19 | September 30 | Number Representations, Operations      |^
 | 5,6   | October 3    | October 14   | Floating-Point, Datapath                | Problem Set 2 |
 | 7,8   | October 17   | October 28   | Single-Cycle Datapath                   |^
@@ -89,8 +89,8 @@ UP Grade conversion scale is as below, applied after rounding Final Grades to th
 
 ### References
 
-* Computer Organization, Hamacher et al, 5th Edition
-* **Computer Organization and Design, Patterson et al**
+* **Computer Organization, Hamacher et al, 5th Edition**
+* Computer Organization and Design, Patterson et al
 * Computer Architecture and Organization, Hayes, 3rd Edition
 * Microprocessors and Microcomputers, Tocci et al, 4th Edition
 * Computer Organization and Architecture, Stallings, 5th Edition
