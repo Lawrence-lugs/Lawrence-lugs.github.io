@@ -28,7 +28,7 @@ Of computers, digital computers are the most common and widespread kind. This co
 
 Watch the lecture below:
 
-<!-- iframe here -->
+<iframe width="100%" height="500" src="https://www.youtube.com/embed/cbFV3Ma0QVo" title="Computers | Module 1 | EEE 105 1s2223" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 **Study questions:**
 1. What do you think qualifies as a computer?
@@ -45,7 +45,7 @@ Watch the lecture below:
 
 Watch the lecture below:
 
-<!-- iframe here -->
+<iframe width="100%" height="500" src="https://www.youtube.com/embed/nOpuYUXChFs" title="Instructions | Module 1 | EEE 105 1s2223" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 **Study Questions**
 1. How do you think instructions are stored in memory?
@@ -62,7 +62,7 @@ Instructions are fed to digital computers in **binary form**. To be human readab
 
 Watch the lecture below:
 
-<!-- iframe here -->
+<iframe width="100%" height="500" src="https://www.youtube.com/embed/J8h3Pnn0CK0" title="MIPS Instructions I | Module 1 | EEE 105 1s2223" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 For a list of all MIPS instructions, refer to [this document](https://www.dsi.unive.it/~gasparetto/materials/MIPS_Instruction_Set.pdf).
 
@@ -93,7 +93,8 @@ The registers in MIPS have "suggested" usages. For example, $1 ($at) is used by 
 
 The other names for the register purposes are related to **procedures**, which will be discussed in the lecture below:
 
-<!-- iframe here -->
+<iframe width="100%" height="500" src="https://www.youtube.com/embed/83N1AhAAWC4" title="MIPS Instructions II | Module 1 | EEE 105 1s2223" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 **Study Questions**
 1. Are the frame pointer and stack pointer automatically updated when you call a procedure?
 2. List down the things you need to do when you call a procedure.
