@@ -73,8 +73,19 @@ For a list of all MIPS instructions, refer to [this document](https://www.dsi.un
 2. How many types of instruction encoding are there for MIPS?
 3. How long are the instructions for an x86 computer? for an x86_64 computer? Apple M1?
 
-## **QUIZ**
-
+**Important Notes**
+When referencing memory:
+* BEQ and BNE use address offset relative to the NEXT instruction > e.g. if address = -3, they go to the code 2 lines before the branch.
+    ```
+    it goes to me
+    addi $2,$3,0x0004
+    beq $2,$3,-3
+    ```
+* J uses absolute addresses. Note: Mars does the division for you, but the 
+    ```
+    0x00400000 : it goes to me
+    0x00400004 : opcode = 2, address = 0x100001
+    ```
 <hr><br>
 
 ## Topic 4: MIPS Instructions II
@@ -88,8 +99,6 @@ The other names for the register purposes are related to **procedures**, which w
 1. Are the frame pointer and stack pointer automatically updated when you call a procedure?
 2. List down the things you need to do when you call a procedure.
 
-## **QUIZ**
-
 <hr><br>
 
 ## Outcomes
@@ -98,3 +107,9 @@ At this point you should:
 1. Know how digital computers are organized
 2. Be able to explain how a keypress is translated to a change in the computer output.
 3. Be able to translate high-level code into MIPS assembly equivalents.
+
+<hr><br>
+
+## Quiz
+
+Check the UVLE for the Module 1 Quiz.
