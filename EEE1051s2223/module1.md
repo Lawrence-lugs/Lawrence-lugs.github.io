@@ -20,7 +20,7 @@ This 2-week module is divided into 4 subtopics. Some topics have quizzes- so mak
 
 <hr><br>
 
-## Topic 1: Computers
+## Topic 1: Computers ([handout](https://lawrence-lugs.github.io/EEE1051s2223/computers.html))
 
 A **computer** is a machine that has inputs and outputs. It accepts input information, such as a mouse stroke, processes this information, and produces some resulting output information.
 
@@ -39,7 +39,7 @@ Watch the lecture below:
 
 <hr><br>
 
-## Topic 2: Instructions
+## Topic 2: Instructions 
 
 **Instructions** are how we tell digital computers what to do. 
 
@@ -54,7 +54,7 @@ Watch the lecture below:
 
 <hr><br>
 
-## Topic 3: MIPS Instructions I
+## Topic 3: MIPS Instructions I ([handout](https://lawrence-lugs.github.io/EEE1051s2223/MIPSInstructions.html))
 
 **MIPS** is a simple and popular computer architecture. It is a **reduced instruction set computer (RISC)**, meaning it has fewer and simpler instructions.
 
