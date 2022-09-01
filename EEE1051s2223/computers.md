@@ -114,7 +114,3 @@ To facilitate communication between all the components, bus structures are somet
 For example, a single bus structure can take input from one block and pass its output to another block. However, only one input and one output can be active with a single bus.
 
 ![](\images\2022-08-30-17-17-33.png){: style="width:70%;margin:auto;display:block"}
-
-### Quiz
-
-Follow the link below to the UVLE
