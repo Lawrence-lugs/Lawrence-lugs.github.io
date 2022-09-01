@@ -1,5 +1,5 @@
 ---
-title: "Computers, Instructions | EEE 105 Module 1"
+title: "Study Guide | EEE 105 Module 1"
 layout: material
 categories:
 - coursematerial
@@ -10,111 +10,55 @@ group: "EEE 105 1s2223"
 
 ### UP EEEi | Lawrence Quizon
 
+<hr><br>
+
+# Module Intro 
+
+In this module, you will learn the basics about what a computer is, what computer instructions are, MIPS, and details of MIPS instructions.
+
+This 2-week module is divided into 4 subtopics. Some topics have quizzes- so make sure to do them.
+
+<hr><br>
+
+## Topic 1: Computers
+
 A **computer** is a machine that has inputs and outputs. It accepts input information, such as a mouse stroke, processes this information, and produces some resulting output information.
 
-![](\images\2022-08-30-16-37-44.png){: style="width:70%;margin:auto;display:block"}
+Of computers, digital computers are the most common and widespread kind. This course will be concerned mostly on the organization and workings of digital von-neumann architecture computers.
 
-### Computer Blocks
+Watch the lecture below:
 
-We can break down a computer into basic internal blocks as follows:
+<!-- iframe here -->
 
-![](\images\2022-08-30-16-37-55.png){: style="width:70%;margin:auto;display:block"}
+### **Study questions:**
+1. What do you think qualifies as a computer?
+2. Try to describe what happens when you press the keys on your keyboard.
+3. What happens when your computer doesn't have an OS?
+4. Do research and find:
+   1. What is a BIOS?
+   2. What is archlinux?
 
-The **input** is some module that takes in some physical data, like mouse movement, keypress, or temperature and transforms it into computer-readable digital data. The **output** takes in some digital data and transforms it into something that humans can interpret and appreciate, like pixels on a monitor, or a 7-segment display. 
+## Topic 2: Instructions
 
-![](\images\2022-08-30-16-39-07.png){: style="width:70%;margin:auto;display:block"}
+**Instructions** are how we tell digital computers what to do. 
 
-The **CPU/processor** transforms digital input data to digital output data.
-The **arithmetic and logic unit (ALU)** contains functional units for performing operations on digital data, usually arithmetic operations (+,-,*,/).
-The control unit controls the processor. It reads instructions and tells the ALU what to do in order to transform input data into the desired output data.
+Watch the lecture below:
 
-**Memory** stores digital data through time and space.
-It can also store instructions, which are commands that govern the transfer and processing of information within the computer.
+<!-- iframe here -->
 
-There are two classes of memory:
-1. Primary Storage
-    Quick to read and write, usually small ~4-16GB. **This is your RAM.**
-2. Secondary Storage
-    Relatively slow reads and writes, usually large ~128GB - 1TB. **This is your disk (SSD/Flash/Hard).**
+**Study Questions**
+1. How do you think instructions are stored in memory?
+2. What design choices would go into designing a computer?
+3. Does a computer architecture and its instructions need to be co-designed?
 
-> Note that the above are simplified definitions, since computers exist that do not have to use digital data, or need specifically the above blocks such as quantum computers and analog computers.
+## Topic 3: MIPS Instructions I
 
-Memory, for our purposes, can be thought of as a big table. 
+**MIPS** is a simple and popular computer architecture. It is a **reduced instruction set computer (RISC)**, meaning it has fewer and simpler instructions.
 
-| Address | Data                      |
-| ------- | ------------------------- |
-| 1       | 0111 - 1100 - 0000 - 0100 |
-| 2       | 0000 - 1110 - 0000 - 0111 |
-| 3       | 0000 - 0101 - 0000 - 0110 |
-| 4       | 0000 - 0100 - 0001 - 0001 |
-| …       | …                         |
-| 1023    | 0001 - 0000 - 0011 - 0000 |
-| 1024    | 0000 - 0010 - 0000 - 0000 |
+Instructions are fed to digital computers in **binary form**. To be human readable, this **binary form** can be translated one-to-one into a language called **assembly**; which may differ per computer architecture.
 
-Data is accessed by providing the memory an address, and the corresponding data comes out.
+## Topic 4: MIPS Instructions II
 
-### How a computer works
+The registers in mips have "suggested" usages. For example, $1 ($at) is used by pseudoinstructions, which you can think of as compound instructions- more than one but written with one line.
 
-We take a simplified example: how does mouse movement end up as cursor movement? 
-
-In the figure below:
-1. A mouse encodes its x,y position and its velocity in a digital format and writes it into memory.
-2. CPU reads the instruction telling it to process the mouse data, takes the mouse data from memory, and calculates the new corresponding pixel values.
-3. CPU writes the processed pixel values into memory.
-4. The monitor reads the pixel values in memory 60 times per second (for a 60FPS monitor). 
-
-![](\images\2022-08-30-16-43-06.png){: style="width:70%;margin:auto;display:block"}
-
-### Memory and Processor
-
-Now let's take a deeper look into what happens between the memory and the processor.
-
-1. The processor first reads the instruction on address 8. It follows it, storing the value 1024 into internal register R1.
-2. The processor reads the instruction on address 9. Value 123 goes into R3.
-3. The processor reads instruction on address 10, and adds R1 and R2, places the result in R3.
-4. The processor reads the instruction on 11, storing the value in R3 into address 668.
-
-> How does the processor know which instruction to read? A: Instructions are read in sequence. The current address is stored in the PC, and is incremented by one address everytime an instruction is run.
-
-![](\images\2022-08-30-17-03-36.png){: style="width:70%;margin:auto;display:block"}
-
-### C to Machine Language
-
-The very first programmers used to write things in pure binary language. Binary values corresponded to specific things that the instructor needed to do:
-
-``` 
-0001 0001 0010 0011
-ADD  R1   R2   R3    (human language equivalent)
-```
-
-Eventually, it became possible to write directly in the human language equivalent- now known as **assembly code**. The translator from assembly to binary machine code is called the **assembler**.
-
-```
-LOAD R1,Mem[666]
-LOAD R2,Mem[667]
-ADD R3,R1,R2
-STORE Mem[668],R3
-```
-
-This is still hard to write in, so people made **higher-level languages** like C and C++. Human logic translates better to these higher-level languages than it does to assembly. The translator from higher-level languages to assembly is called the **compiler**.
-
-```
-int a;
-a = 1024
-int b;
-b = 123
-c = a + b;
-# no need to think about the memory locations anymore 
-```
-
-### Bus Structures
-
-To facilitate communication between all the components, bus structures are sometimes used.
-
-For example, a single bus structure can take input from one block and pass its output to another block. However, only one input and one output can be active with a single bus.
-
-![](\images\2022-08-30-17-17-33.png){: style="width:70%;margin:auto;display:block"}
-
-### Quiz
-
-Follow the link below to the UVLE Quiz
+The other naming 
