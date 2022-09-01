@@ -34,8 +34,7 @@ Watch the lecture below:
 1. What do you think qualifies as a computer?
 2. Try to describe what happens when you press the keys on your keyboard.
 3. What happens when your computer doesn't have an OS?
-4. Do research and find out:
-   1. What is the BIOS?
+4. What is the BIOS?
 5. Where does the GPU come into play?
 
 <hr><br>
@@ -81,7 +80,7 @@ When referencing memory:
     addi $2,$3,0x0004
     beq $2,$3,-3
     ```
-* J uses absolute addresses. Note: Mars does the division for you, but the 
+* J uses absolute addresses (/4).
     ```
     0x00400000 : it goes to me
     0x00400004 : opcode = 2, address = 0x100001
