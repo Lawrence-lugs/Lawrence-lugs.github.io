@@ -18,6 +18,6 @@ My primary research interest is in the creation of brainlike systems in software
 {% assign page_list = site.pages | where_exp: "item" , "item.path contains folder" %}
 {% assign groupmain = page_list | where_exp: "item" , "item.name contains 'groupmain'" %}
 {% for item in page_list %}
-<a href="{{item.dir}}">{{item.title}}</a>
+<a href="{{item.url}}">{{item.title}}</a>
 {% endfor %}
 {% endfor %}
