@@ -44,7 +44,7 @@ You may refer to the table below for the **course schedule**.
 | Week  | Start        | End          | Topic                                   | Assessment    |
 | ----- | ------------ | ------------ | --------------------------------------- | ------------- |
 | 1,2   | September 5  | September 16 | [Computers, Instructions](module1.html) | Problem Set 1 |
-| 3,4   | September 19 | September 30 | Number Representations, Operations      |^
+| 3,4   | September 19 | September 30 | [Number Representations, Operations](module2.html)      |^
 | 5,6   | October 3    | October 14   | Floating-Point, Datapath                | Problem Set 2 |
 | 7,8   | October 17   | October 28   | Single-Cycle Datapath                   |^
 | 9,10  | October 31   | November 11  | MIPS Multi-Cycle Datapath               | Problem Set 3 |
