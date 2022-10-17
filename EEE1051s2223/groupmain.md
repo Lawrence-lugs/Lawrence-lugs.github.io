@@ -16,8 +16,6 @@ I will deliver this course **remotely**, and hold classes **asynchronously**. I 
 
 Lab classes will be held by Sir Zyrel Renzo Sanchez separately.
 
-![](\images\2022-08-30-11-42-37.png){: style="float:right;width:40%"}
-
 ### Communication
 
 You will automatically be enrolled into an UVLE course site. You should be able to see that you are enrolled in **EEE 105 - THX**
@@ -44,22 +42,21 @@ You may refer to the table below for the **course schedule**.
 | Week  | Start        | End          | Topic                                   | Assessment    |
 | ----- | ------------ | ------------ | --------------------------------------- | ------------- |
 | 1,2   | September 5  | September 16 | [Computers, Instructions](module1.html) | Problem Set 1 |
-| 3,4   | September 19 | September 30 | [Number Representations, Operations](module2.html)      |^
-| 5,6   | October 3    | October 14   | Floating-Point, Datapath                | Problem Set 2 |
-| 7,8   | October 17   | October 28   | Single-Cycle Datapath                   |^
-| 9,10  | October 31   | November 11  | MIPS Multi-Cycle Datapath               | Problem Set 3 |
-| 11,12 | November 14  | November 25  | Pipelined Datapath                      |^
-| 13,14 | November 28  | December 19  | Memory                                  | Problem Set 4 |
-| 15,16 | December 12  | December 21  | IO                                      |^
+| 3,4   | September 19 | September 30 | [Number Representations, Operations](module2.html)      |Problem Set 1 |
+| 5,6   | October 3    | October 14   | Floating Point                          | --- |
+| 7,8   | October 17   | October 28   | Single-Cycle Datapath                   |Problem Set 2 |
+| 9,10  | October 31   | November 11  | MIPS Multi-Cycle Datapath               |Problem Set 2  |
+| 11,12 | November 14  | November 25  | Pipelined Datapath                      |Problem Set 3 |
+| 13,14 | November 28  | December 19  | Memory                                  |Problem Set 3 |
+| 15,16 | December 12  | December 21  | IO                                      | Quiz Only |
 
 ### Problem Sets and Deadlines
 
-The deadlines for the problem sets are going to be a week after their last topic. Hence:
+The deadlines for the problem sets are going to be a two weeks after their last topic. Hence:
 
 1. Problem Set 1 - October 7
-2. Problem Set 2 - November 4
-3. Problem Set 3 - December 2
-4. Problem Set 4 - January 6
+2. Problem Set 2 - November 11
+3. Problem Set 3 - January 6
 
 Quizzes will open and close along with their respective topics.
 
