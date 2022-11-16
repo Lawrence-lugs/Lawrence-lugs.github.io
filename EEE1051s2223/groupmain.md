@@ -46,9 +46,8 @@ You may refer to the table below for the **course schedule**.
 | 5,6   | October 3    | October 14   | [Floating Point](module2.html)                         | Problem Set 1 |
 | 7,8   | October 17   | October 28   | [Single-Cycle Datapath](module4.html)                    | Problem Set 2 |
 | 9,10  | October 31   | November 11  | [MIPS Multi-Cycle Datapath](module5.html)               | Problem Set 2 |
-| 11,12 | November 14  | November 25  | Pipelined Datapath                      | Problem Set 3 |
-| 13,14 | November 28  | December 19  | Memory                                  | Problem Set 3 |
-| 15,16 | December 12  | December 21  | IO                                      | Quiz Only |
+| 11,12 | November 14  | November 25  | Memory                      | Problem Set 3 |
+| 13,14 | November 28  | December 12  | IO                                  | Problem Set 3 |
 
 ### Problem Sets and Deadlines
 
