@@ -47,7 +47,7 @@ You may refer to the table below for the **course schedule**.
 | 7,8   | October 17   | October 28   | [Single-Cycle Datapath](module4.html)                    | Problem Set 2 |
 | 9,10  | October 31   | November 11  | [MIPS Multi-Cycle Datapath](module5.html)               | Problem Set 2 |
 | 11,12 | November 14  | November 25  | [Memory](module6.html)                      | Problem Set 3 |
-| 13,14 | November 28  | December 12  | IO                                  | Problem Set 3 |
+| 13,14 | November 28  | December 12  | [IO](module7.html)                                  | Problem Set 3 |
 
 ### Problem Sets and Deadlines
 
